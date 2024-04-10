@@ -15,37 +15,31 @@ class Program
         Console.WriteLine(GenerateRandomNumber(1, 100));
     }
 
-    // Function to calculate the sum of two numbers
     static int Sum(int a, int b)
     {
         return a + b;
     }
 
-    // Function to greet the user
     static void GreetUser(string name)
     {
         Console.WriteLine("Hello, " + name + "!");
     }
 
-    // Function to find the maximum of two numbers
     static int Max(int a, int b)
     {
         return (a > b) ? a : b;
     }
 
-    // Function to check if a number is even
     static bool IsEven(int num)
     {
         return num % 2 == 0;
     }
 
-    // Function to convert temperature from Celsius to Fahrenheit
     static double ConvertToFahrenheit(double celsius)
     {
         return ((celsius * 9 / 5) + 32);
     }
 
-    // Function to reverse a string
     static string ReverseString(string str)
     {
         char[] charArray = str.ToCharArray();
@@ -53,7 +47,6 @@ class Program
         return new string(charArray);
     }
 
-    // Function to count the occurrences of a character in a string
     static int CountChars(string str, char ch)
     {
         int count = 0;
@@ -67,7 +60,6 @@ class Program
         return count;
     }
 
-    // Function to calculate the factorial of a number
     static int CalculateFactorial(int num)
     {
         int result = 1;
@@ -78,7 +70,6 @@ class Program
         return result;
     }
 
-    // Function to check if a number is prime
     static bool IsPrime(int num)
     {
         if (num <= 1)
@@ -95,7 +86,6 @@ class Program
         return true;
     }
 
-    // Function to generate a random number in a specified range
     static int GenerateRandomNumber(int min, int max)
     {
         Random rnd = new Random();
