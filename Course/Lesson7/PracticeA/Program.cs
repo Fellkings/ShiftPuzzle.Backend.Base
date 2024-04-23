@@ -1,11 +1,9 @@
 ﻿namespace PracticeA;
+
 class Program
 {
-    static void Main(string[] args)
-    {
-    }
-    //task1
-    static int Factorial(int a)
+    //task 1
+    static int factorial(int a)
     {
         if (a <= 1)
         {
@@ -13,23 +11,28 @@ class Program
         }
         else
         {
-            return a * Factorial(a - 1);
+            return a * factorial(a - 1);
         }
     }
-    //task2
-    static int FibonachiNums(int num)
+    //task 1
+
+    //task 2
+    static int fibonachiNums(int num)
     {
-        if (num <= 2)
+        if (n == 0)
+        {
+            return 0;
+        }
+        if (n == 1)
         {
             return 1;
         }
-        else
-        {
-            return FibonachiNums(num - 1) + FibonachiNums(num - 2);
-        }
+        return fibonachiNums(num - 1) + fibonachiNums(num - 2);
     }
-    //task3
-    static string Revers(string a)
+    //task 2
+
+    //task 3
+    static string reverseString(string a)
     {
         if (a.Length <= 1)
         {
@@ -37,11 +40,13 @@ class Program
         }
         else
         {
-            return a[a.Length - 1] + Revers(a.Substring(0, a.Length - 1));
+            return a[a.Length - 1] + reverseString(a.Substring(0, a.Length - 1));
         }
     }
-    //task4
-    static int Sum(int[] a)
+    //task 3
+
+    //task 4
+    static int sumElements(int[] a)
     {
         if (a.Length == 1)
         {
@@ -49,11 +54,13 @@ class Program
         }
         else
         {
-            return Sum(a[0..(a.Length - 1)]) + a[a.Length - 1];
+            return sumElements(a[0..(a.Length - 1)]) + a[a.Length - 1];
         }
     }
-    //task5
-    static int EvclidAlhoritm(int a, int b)
+    //task 4
+
+    //task 5
+    static int greatestCommonDivisor(int a, int b)
     {
         if (a == 0 || b == 0)
         {
@@ -63,15 +70,17 @@ class Program
         {
             if (a > b)
             {
-                return EvclidAlhoritm(a % b, b);
+                return greatestCommonDivisor(a % b, b);
             }
             else
             {
-                return EvclidAlhoritm(a, b % a);
+                return greatestCommonDivisor(a, b % a);
             }
         }
     }
-    //task6
+    //task 5
+
+    //task 6
     static bool isPolindrome(string a)
     {
         if (a == Revers(a))
@@ -83,156 +92,44 @@ class Program
             return false;
         }
     }
-    //task8
-    static int[][] SortThrough(int[][] a)
+    //task 6
+
+    //task 7
+    static void MoveTowers(int disks, string source, string auxiliary, string destination)
     {
-        if (a.Length <= 0)
+        if (disks == 1)
         {
-            return a;
+            Console.WriteLine($"Передвиньте диск 1 с {source} на {destination}");
         }
         else
         {
-            foreach (int b in a[0])
-            {
-                Console.Write(b);
-            }
-            Console.WriteLine();
-            return (SortThrough(a[1..(a.Length)]));
+            MoveTowers(disks - 1, source, destination, auxiliary);
+            Console.WriteLine($"Передвиньте диск {disks} с {source} на {destination}");
+            MoveTowers(disks - 1, auxiliary, source, destination);
         }
     }
-    //task9
-    static void CopyTree(TreeNode at, BinaryTree to)
+    //task 7
+
+    //task 8
+    static void generateSubsets(List<int> set, List<int> subset, int index)
     {
-        if (at != null)
+        if (index == set.Count)
         {
-            to.Insert(at.Value);
-            CopyTree(at.Left, to);
-            Console.Write(at.Value + " ");
-            CopyTree(at.Right, to);
-        }
-    }
-    //task7
-    static void SolveHanoi(int n, char fromPeg, char toPeg, char auxPeg)
-    {
-        if (n == 1)
-        {
-            Console.WriteLine($"Переместить диск 1 с {fromPeg} на {toPeg}");
+            Console.WriteLine("Subset: " + string.Join(", ", subset));
             return;
         }
 
-        SolveHanoi(n - 1, fromPeg, auxPeg, toPeg);
-        Console.WriteLine($"Переместить диск {n} с {fromPeg} на {toPeg}");
-        SolveHanoi(n - 1, auxPeg, toPeg, fromPeg);
+        subset.Add(set[index]);
+        generateSubsets(set, subset, index + 1);
+        subset.RemoveAt(subset.Count - 1);
+
+        generateSubsets(set, subset, index + 1);
     }
+    //task 8
 
+    //task 9
+    //task 9
 
-}
-
-class TreeNode
-{
-    public int Value { get; set; }
-    public TreeNode Left { get; set; }
-    public TreeNode Right { get; set; }
-
-    public TreeNode(int value)
-    {
-        Value = value;
-        Left = null;
-        Right = null;
-    }
-}
-
-class BinaryTree
-{
-    public TreeNode Root { get; set; }
-
-    public BinaryTree()
-    {
-        Root = null;
-    }
-
-    public void Insert(int value)
-    {
-        Root = InsertRec(Root, value);
-    }
-
-    private TreeNode InsertRec(TreeNode root, int value)
-    {
-        if (root == null)
-        {
-            root = new TreeNode(value);
-            return root;
-        }
-
-        if (value < root.Value)
-        {
-            root.Left = InsertRec(root.Left, value);
-        }
-        else if (value > root.Value)
-        {
-            root.Right = InsertRec(root.Right, value);
-        }
-
-        return root;
-    }
-
-    public void Delete(int value)
-    {
-        Root = DeleteRec(Root, value);
-    }
-
-    private TreeNode DeleteRec(TreeNode root, int value)
-    {
-        if (root == null)
-        {
-            return root;
-        }
-
-        if (value < root.Value)
-        {
-            root.Left = DeleteRec(root.Left, value);
-        }
-        else if (value > root.Value)
-        {
-            root.Right = DeleteRec(root.Right, value);
-        }
-        else
-        {
-            if (root.Left == null)
-            {
-                return root.Right;
-            }
-            else if (root.Right == null)
-            {
-                return root.Left;
-            }
-
-            root.Value = GetMinValue(root.Right);
-
-            root.Right = DeleteRec(root.Right, root.Value);
-        }
-
-        return root;
-    }
-
-    private int GetMinValue(TreeNode root)
-    {
-        int minValue = root.Value;
-        while (root.Left != null)
-        {
-            minValue = root.Left.Value;
-            root = root.Left;
-        }
-        return minValue;
-    }
-
-    public void TraverseInOrder(TreeNode root)
-    {
-        if (root != null)
-        {
-            TraverseInOrder(root.Left);
-            Console.Write(root.Value + " ");
-            TraverseInOrder(root.Right);
-        }
-    }
+    //task 10
+    //task 10
 }
