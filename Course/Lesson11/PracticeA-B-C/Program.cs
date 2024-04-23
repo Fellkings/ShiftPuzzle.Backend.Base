@@ -130,29 +130,66 @@ class SimpleDB
     {
         Console.WriteLine("Funcional ne realizovan...");
         //  practice B;
+        fileService.SaveToFile(students);
     }
 
     public void LoadDB()
     {
         Console.WriteLine("Funcional ne realizovan...");
         //  practice B;
+        students = fileService.LoadFromFile();
     }
     public void AddStudent(string name)
     {
         Console.WriteLine("Funcional ne realizovan...");
-         //  practice A;
+        //  practice A;
+        var s = new Student(name);
+        students.Add(name, s);
     }
 
     public void RemoveStudent(string name)
     {
         Console.WriteLine("Funcional ne realizovan...");
-         //  practice A;
+        //  practice A;
+        students.Remove(name);
     }
 
     public void ShowStudentInfo(string name)
     {
         Console.WriteLine("Funcional ne realizovan...");
-         //  practice A;
+        //  practice A;
+        bool flag = false;
+        var s = new Student("not found");
+
+        foreach (var key in students.Keys)
+        {
+            if (key == name)
+            {
+                flag = true;
+                s = students[key];
+                break;
+            }
+        }
+
+        if (flag)
+        {
+            Console.WriteLine("Name: " + s.Name);
+            Console.WriteLine("\nOcenku:\n");
+            foreach (var key in s.Grades.Keys)
+            {
+                Console.WriteLine("{0}: {1}", key, s.Grades[key]);
+            }
+            Console.WriteLine("\nPoseshaemost':\n");
+            foreach (var key in s.Attendance.Keys)
+            {
+                Console.WriteLine("{0}: {1}", key, s.Attendance[key]);
+            }
+        }
+
+        else
+        {
+            Console.WriteLine("User is not found");
+        }
     }
 
     public Student GetStudent(string name)
