@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using Newtonsoft.Json;
-
+//using Newtonsoft.Json;
 
 public class Person
 {
     public string Name { get; set; }
     public int Age { get; set; }
-
 
     public Person(string name, int age)
     {
@@ -16,12 +14,10 @@ public class Person
         SetAge(age);
     }
 
-
     public void Introduce()
     {
         Console.WriteLine("Hello, my name is " + Name);
     }
-
 
     public void SetAge(int newAge)
     {
@@ -36,11 +32,9 @@ public class Person
     }
 }
 
-
 public class Employee : Person
 {
     public string Position { get; set; }
-
 
     public Employee(string name, int age, string position) : base(name, age)
     {
@@ -48,12 +42,40 @@ public class Employee : Person
     }
 }
 
-
 public class PersonFileService
 {
-    
-}
+    public static void WritePeopleToFile(List<Person> people)
+    {
+        // Используем File.WriteAllLines для записи списка людей в файл
+        File.WriteAllLines("test.txt", people.Select(p => p.Name + ", " + p.Age));
+    }
 
+    public static List<Person> ReadPeopleFromFile()
+    {
+        // Используем File.ReadLines для чтения файла построчно
+        var lines = new List<string>();
+        using (var reader = new StreamReader("test.txt"))
+        {
+            string line;
+            while ((line = reader.ReadLine()) != null)
+            {
+                lines.Add(line);
+            }
+        }
+
+        var people = new List<Person>();
+        foreach (var line in lines)
+        {
+            string[] per = line.Split(',');
+            int age;
+            if (int.TryParse(per[1], out age))
+            {
+                people.Add(new Person(per[0], age));
+            }
+        }
+        return people;
+    }
+}
 
 public class Program
 {
@@ -67,15 +89,12 @@ public class Program
             new Employee("Charlie", 42, "Manager")
         };
 
-
         // Writing people to the file
-        //PersonFileService.WritePeopleToFile(people);
-
+        PersonFileService.WritePeopleToFile(people);
 
         // Reading people from the file
-        //var peopleFromFile = PersonFileService.ReadPeopleFromFile();
-        
-        
+        var peopleFromFile = PersonFileService.ReadPeopleFromFile();
+
         foreach (var person in peopleFromFile)
         {
             person.Introduce();
