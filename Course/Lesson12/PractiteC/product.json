@@ -1,0 +1,9 @@
+{
+    "id": 456,
+    "name": "Телевизор Samsung",
+    "description": "Телевизор Samsung с диагональю 55 дюймов, разрешением 4K, поддержкой Smart TV.",
+    "price": 30000,
+    "quantity": 10,
+    "category": "Электроника",
+    "brand": "Samsung"
+}

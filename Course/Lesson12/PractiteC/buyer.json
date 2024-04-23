@@ -1,0 +1,14 @@
+{
+    "id": 123,
+    "first_name": "Иван",
+    "last_name": "Иванов",
+    "email": "ivanov@mail.ru",
+    "phone_number": "+79123456789",
+    "address": {
+        "street": "ул. Ленина",
+        "house": 1,
+        "apartment": 2,
+        "city": "Москва",
+        "postal_code": "123456"
+    }
+}

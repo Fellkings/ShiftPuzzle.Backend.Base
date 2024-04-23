@@ -1,8 +1,8 @@
-
-    "category": "Electronics",
-    "products": [
-        "TV",
-        "Radio",
-        "Camera"
+{
+    "category":"Electronics",
+    "products":[
+       "TV",
+       "Radio",
+       "Camera"
     ]
-}
+ }

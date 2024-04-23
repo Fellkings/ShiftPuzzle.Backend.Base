@@ -1,7 +1,7 @@
-
-    "shipping": {
-        "method": "Standard",
-        "price": 20,
-        "estimated_days": 3
+{
+    "shipping":{
+       "method":"Standard",
+       "price":20,
+       "estimated_days":3
     }
-}
+ }
