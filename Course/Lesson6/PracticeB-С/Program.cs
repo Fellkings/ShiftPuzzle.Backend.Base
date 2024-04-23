@@ -1,47 +1,40 @@
 ﻿namespace PracticeB_С;
+
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        int[] arr = { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
-        int[] maxSubarray = FindMaxSubarray(arr);
-
-        Console.Write("Max subarray with maximum sum: ");
-        foreach (int num in maxSubarray)
+        int[] array = { -2, 1, -3, 4, -1, 2, 1, -5, 4, 5 };
+        int[][] dp = new int[array.Length][];
+        for (int i = 0; i < array.Length; i++)
         {
-            Console.Write(num + " ");
+            dp[i] = new int[array.Length];
         }
+
+        int maxSum = maxSubarraySum(array, dp);
+        Console.WriteLine("Максимальная сумма подпоследовательности: " + maxSum);
     }
 
-    public static int[] FindMaxSubarray(int[] arr)
+    static int maxSubarraySum(int[] array, int[][] dp)
     {
-        int maxSum = int.MinValue;
-        int currentSum = 0;
-        int start = 0;
-        int end = 0;
-        int s = 0;
-
-        for (int i = 0; i < arr.Length; i++)
+        for (int i = 0; i < array.Length; i++)
         {
-            currentSum += arr[i];
+            dp[i][i] = array[i];
+        }
 
-            if (maxSum < currentSum)
+        for (int len = 2; len <= array.Length; len++)
+        {
+            for (int i = 0; i < array.Length - len + 1; i++)
             {
-                maxSum = currentSum;
-                start = s;
-                end = i;
-            }
-
-            if (currentSum < 0)
-            {
-                currentSum = 0;
-                s = i + 1;
+                int j = i + len - 1;
+                dp[i][j] = array[j];
+                for (int k = i + 1; k < j; k++)
+                {
+                    dp[i][j] = Math.Max(dp[i][j], dp[i][k] + dp[k][j]);
+                }
             }
         }
 
-        int[] result = new int[end - start + 1];
-        Array.Copy(arr, start, result, 0, end - start + 1);
-        return result;
+        return dp[0][array.Length - 1];
     }
-    
 }
